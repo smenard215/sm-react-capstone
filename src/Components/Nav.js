@@ -116,7 +116,7 @@ function Nav() {
               <Button
                 key={page}
                 onClick={handleCloseNavMenu}
-                sx={{ my: 2, mx: 2, color: 'black', display: 'block' }}
+                sx={{ my: 2, px: 5, color: 'black', display: 'block' }}
               >
                 {page}
               </Button>
