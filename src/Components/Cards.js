@@ -47,7 +47,7 @@ const handleOrder = (id) => {
                 <h5>{recipe.title}</h5>
                 <p>${recipe.price}</p>
               </div>
-              <p>{recipe.description}</p>
+              <p className="description">{recipe.description}</p>
               <button className="orderbtn" onClick={() => handleOrder(recipe.id)}>Order Now</button>
             </div>
           </div>

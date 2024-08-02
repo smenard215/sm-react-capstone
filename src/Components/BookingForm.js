@@ -5,16 +5,27 @@ const BookingForm = (props) => {
   const [guests, setGuests] = useState("");
   const [date, setDate] = useState("");
   const [times, setTimes] = useState("");
+  const [phoneNumber, setPhoneNumber] = useState("");
 
   // Handle form submission
   const handleSubmit = (e) => {
     e.preventDefault();
-    props.submitForm({ occasion, guests, date, times });
+    props.submitForm({occasion, guests, date, times, phoneNumber });
   };
 
   // Handle date change
   const handleDateChange = (e) => {
     setDate(e.target.value);
+  };
+
+  // Handle phone number formatting
+  const handlePhoneNumberChange = (e) => {
+    let value = e.target.value.replace(/\D/g, ''); // Remove all non-digits
+    if (value.length > 10) value = value.slice(0, 10); // Limit to 10 digits
+    const formattedValue = value
+      .replace(/(\d{3})(\d{0,3})/, '($1) $2')
+      .replace(/(\d{3})(\d{0,4})/, '$1-$2');
+    setPhoneNumber(formattedValue);
   };
 
   return (
@@ -23,7 +34,33 @@ const BookingForm = (props) => {
         <form onSubmit={handleSubmit}>
           <fieldset className="formField">
             <div>
-              <label htmlFor="book-date">Choose Date:</label>
+              <h4>Please fill out the form below to make your reservation. All Fields are required.</h4>
+              <div>
+                <label htmlFor="full-name">Name:</label>
+                <input
+                  id="fullName"
+                  type="text"
+                  required
+                />
+                <label htmlFor="email">Email:</label>
+                <input
+                  id="email"
+                  type="email"
+                  required
+                />
+              </div>
+              <div>
+                <label htmlFor="phone-number">Phone Number:</label>
+                <input
+                  id="phone-number"
+                  type="tel"
+                  value={phoneNumber}
+                  onChange={handlePhoneNumberChange}
+                  placeholder="(123) 456-7890"
+                />
+              </div>
+              <div>
+              <label htmlFor="book-date">Select a Date:</label>
               <input
                 id="book-date"
                 value={date}
@@ -31,55 +68,53 @@ const BookingForm = (props) => {
                 type="date"
                 required
               />
-            </div>
-            <div>
-              <label htmlFor="book-time">Choose Time:</label>
-              <select
-                id="book-time"
-                value={times}
-                onChange={(e) => setTimes(e.target.value)}
-                required
-              >
-                <option value="">Select a Time</option>
-                {props.availableTimes?.map((availableTime) => (
-                  <option key={availableTime} value={availableTime}>
-                    {availableTime}
-                  </option>
-                ))}
-              </select>
-            </div>
-            <div>
-              <label htmlFor="book-guests">Number of Guests:</label>
-              <input
-                id="book-guests"
-                min="1"
-                value={guests}
-                onChange={(e) => setGuests(e.target.value)}
-                type="number"
-                placeholder="0"
-                max="10"
-                required
-              />
-            </div>
-            <div>
-              <label htmlFor="book-occasion">Occasion:</label>
-              <select
-                id="book-occasion"
-                value={occasion}
-                onChange={(e) => setOccasion(e.target.value)}
-                required
-              >
-                <option value="">Select an Option</option>
-                <option value="Birthday">Birthday</option>
-                <option value="Anniversary">Anniversary</option>
-              </select>
-            </div>
-            <div className="btnReceive">
-              <input
-                aria-label="On Click"
-                type="submit"
-                value="Make Your Reservation"
-              />
+              </div>
+              <div>
+                <label htmlFor="book-time">Select Time:</label>
+                <select
+                  id="book-time"
+                  value={times}
+                  onChange={(e) => setTimes(e.target.value)}
+                  required
+                >
+                  <option value="">Select a Time</option>
+                  {props.availableTimes?.map((availableTime) => (
+                    <option key={availableTime} value={availableTime}>
+                      {availableTime}
+                    </option>
+                  ))}
+                </select>
+              </div>
+              <div>
+                <label htmlFor="book-guests">Number of Guests:</label>
+                <input
+                  id="book-guests"
+                  min="1"
+                  value={guests}
+                  onChange={(e) => setGuests(e.target.value)}
+                  type="number"
+                  placeholder="0"
+                  max="10"
+                  required
+                />
+              </div>
+              <div>
+                <label htmlFor="book-occasion">Occasion:</label>
+                <select
+                  id="book-occasion"
+                  value={occasion}
+                  onChange={(e) => setOccasion(e.target.value)}
+                  required
+                >
+                  <option value="">Select an Option</option>
+                  <option value="Birthday">Birthday</option>
+                  <option value="Anniversary">Anniversary</option>
+                </select>
+              </div>
+              <div>
+                <button className="btnReceive" aria-label="On Click" type="submit" value="Confirm Your Reservation">Confirm Your Reservation</button>
+              </div>
+              
             </div>
           </fieldset>
         </form>

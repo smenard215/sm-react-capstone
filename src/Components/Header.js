@@ -7,7 +7,7 @@ const Header = () => {
     <header className="header">
       <section>
         <div className="banner">
-          <h2>Little Lemon</h2>
+          <h2>Little Lemon Restaurant</h2>
           <h3>Chicago</h3>
           <p>
             We are a family owned Mediterraneran restaurant, focused on

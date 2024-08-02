@@ -23,9 +23,9 @@ const Footer = () => {
             <div>
                 <h3>Contact</h3>
             <ul>
-            <li>Address: <br/> 123 Town Street, Chicago</li>
-                <li>Phone: <br/> +00 123 456 789</li>
-                <li>Email: <br/> little@lemon.com</li>
+            <li><b>Address: </b><br/> 123 Town Street, Chicago</li>
+                <li><b>Phone: </b> <br/> <a href="tel:1234567890">(123) 456-7890</a></li>
+                <li><b>Email:</b><br/> <a href="mailto:reservations@littlelemonrestaurant.com">reservations@littlelemonrestaurant.com</a></li>
             </ul>
             </div>
             <div>
